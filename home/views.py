@@ -11,7 +11,9 @@ def home(request):
 
 
 def about(request):
-    return render(request,'about.html')
+    view = {}
+    view['feedbacks'] = Feedback.objects.all()
+    return render(request,'about.html',view)
 
 
 def portfolio(request):
@@ -19,7 +21,9 @@ def portfolio(request):
 
 
 def contact(request):
-    return render(request,'contact.html')
+    stay = {}
+    stay['informations'] = Information.objects.all()
+    return render(request,'contact.html', stay)
 
 
 def price(request):
@@ -29,7 +33,9 @@ def price(request):
 
 
 def services(request):
-    return render(request,'services.html')
+    offer = {}
+    offer['services']= Service.objects.all()
+    return render(request,'services.html',offer)
 
 
 
