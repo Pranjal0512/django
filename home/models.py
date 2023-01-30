@@ -10,6 +10,8 @@ class  Contact(models.Model):
     def __str__(self):
         return self.name
 
+
+
 class Service(models.Model):
     title= models.CharField(max_length=300)
     logo = models.CharField(max_length=300)

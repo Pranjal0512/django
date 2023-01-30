@@ -7,13 +7,15 @@ from .models import *
 def home(request):
     views = {}
     views['services'] = Service.objects.all()
+    views['feedbacks'] = Feedback.objects.all()
+
     return render(request,'index.html',views)
 
 
 def about(request):
-    view = {}
-    view['feedbacks'] = Feedback.objects.all()
-    return render(request,'about.html',view)
+    views = {}
+    views['feedbacks'] = Feedback.objects.all()
+    return render(request,'about.html',views)
 
 
 def portfolio(request):
@@ -21,9 +23,22 @@ def portfolio(request):
 
 
 def contact(request):
-    stay = {}
-    stay['informations'] = Information.objects.all()
-    return render(request,'contact.html', stay)
+    views = {}
+    views['informations'] = Information.objects.all()
+    if request.method == "POST":
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        message = request.POST['message']
+        data = Contact.objects.create(
+            name = name,
+            email = email,
+            message = message,
+
+        )
+        data.save()
+
+    return render(request,'contact.html', views)
 
 
 def price(request):
@@ -33,9 +48,9 @@ def price(request):
 
 
 def services(request):
-    offer = {}
-    offer['services']= Service.objects.all()
-    return render(request,'services.html',offer)
+    views = {}
+    views['services']= Service.objects.all()
+    return render(request,'services.html',views )
 
 
 
